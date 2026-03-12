@@ -1,11 +1,11 @@
 USE axis;
 
 CREATE TABLE usuarios (
-id INT AUTO_INCREMENT PRIMARY KEY,
-nome_completo VARCHAR(30),
-cpf TEXT(11),
-email VARCHAR(100),
-cargo ('administrador','gerente','colaborador') DEFAULT ('colaborador')
-apelido_usuario VARCHAR(30),
-senha VARCHAR(255),
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_completo VARCHAR(100),
+    cpf CHAR(11) UNIQUE,
+    email VARCHAR(100) UNIQUE,
+    cargo ENUM('administrador', 'gerente', 'colaborador') DEFAULT 'colaborador',
+    login VARCHAR(30) UNIQUE,
+    senha VARCHAR(255)
 );

@@ -1,2 +1,12 @@
-.idea
-.env.local
+# Ignorar configurações de IDE
+.idea/
+*.iml
+.DS_Store
+
+src/backend/.env
+
+# Ignorar arquivos compilados (Binários)
+*.class
+src/cadastro.class
+frontend
+src/.DS_Store
