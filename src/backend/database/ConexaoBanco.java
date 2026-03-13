@@ -18,17 +18,19 @@ public class ConexaoBanco {
     private static final String CAMINHO_ENV = ".env";
 
     // Construtor privado para evitar instanciar a classe (Padrão Singleton)
-    private ConexaoBanco() {}
+    private ConexaoBanco() {
+    }
 
     /**
      * Obtém a conexão ativa com o banco de dados MySQL (XAMPP).
+     * 
      * @return Connection objeto de conexão
      */
     public static Connection getConexao() {
         if (conexao == null) {
             try {
                 Properties configuracoes = carregarConfiguracoes();
-                
+
                 String host = configuracoes.getProperty("DB_HOST");
                 String porta = configuracoes.getProperty("DB_PORT");
                 String nomeBanco = configuracoes.getProperty("DB_NOME");
@@ -40,10 +42,10 @@ public class ConexaoBanco {
 
                 // Carrega o driver JDBC do MySQL
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                
+
                 conexao = DriverManager.getConnection(url, usuario, senha);
                 System.out.println("SUCESSO: Conexão com o banco '" + nomeBanco + "' estabelecida!");
-                
+
             } catch (ClassNotFoundException e) {
                 System.err.println("ERRO: Driver JDBC não encontrado! Adicione o MySQL Connector ao projeto.");
             } catch (SQLException e) {
@@ -61,11 +63,11 @@ public class ConexaoBanco {
     private static Properties carregarConfiguracoes() throws IOException {
         Properties props = new Properties();
         File arquivoEnv = new File(CAMINHO_ENV);
-        
+
         if (!arquivoEnv.exists()) {
             throw new IOException("Arquivo .env não encontrado em: " + arquivoEnv.getAbsolutePath());
         }
-        
+
         try (FileInputStream entrada = new FileInputStream(arquivoEnv)) {
             props.load(entrada);
         }
