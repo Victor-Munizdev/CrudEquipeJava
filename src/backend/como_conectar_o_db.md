@@ -10,10 +10,7 @@
 
 ## 3. O Driver JDBC (PostgreSQL)
 
-A conexão agora usa o driver do PostgreSQL. Você deve substituir o arquivo na pasta `lib`:
-
-- Remova: `mysql-connector-j.jar`
-- Adicione: `postgresql-42.x.x.jar` (Baixe em [jdbc.postgresql.org](https://jdbc.postgresql.org/download/))
+A conexão usa o driver do PostgreSQL na pasta `lib`:
 
 ## 4. Mudanças no Código
 
