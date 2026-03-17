@@ -2,11 +2,19 @@
 .idea/
 *.iml
 .DS_Store
+.vscode/
 
+# Configurações sensíveis
 src/backend/.env
 
-# Ignorar arquivos compilados (Binários)
+# Ignorar arquivos compilados (Dist/Bin)
+bin/
 *.class
-src/cadastro.class
-frontend
+src/backend/sources.txt
+
+# Outros
 src/.DS_Store
+node_modules/
+dist/
+.next/
+frontend

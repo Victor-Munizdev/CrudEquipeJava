@@ -1,38 +1,27 @@
-# Guia: Como conectar ao banco (MySQL)
+# Guia: Como conectar ao Supabase (PostgreSQL)
 
-Para fazer o backend Java falar com o banco de dados do XAMPP, siga estes passos:
+Para migrar o backend do XAMPP para o Supabase, siga estes passos:
 
 ---
 
-## 1. Scripts SQL
-Os arquivos de criação das tabelas estão na pasta `src/backend/database/`.
-- Importe o `database.sql` para criar o banco de dados `axis`.
-- Em seguida, rode o `usuarios.sql` e o `equipe.sql`.
+## 1. Configurar o Supabase
+
+1. Crie um projeto no [Supabase](https://supabase.com/).
+2. Vá em **SQL Editor** e cole o conteúdo dos arquivos na pasta `src/backend/database/` (na ordem: `usuarios.sql`, `projetos.sql`, `equipe.sql`, `tarefas.sql`).
+3. Vá em **Project Settings > Database** e pegue os dados de conexão (Host, Port, User, Password).
 
 ## 2. Configurações (.env)
-O arquivo de configuração está em `src/backend/.env`. Crie ele e verifique se as credenciais batem com o seu XAMPP:
 
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_NOME=axis
-DB_USUARIO=root
-DB_SENHA=
-```
+## 3. O Driver JDBC (PostgreSQL)
 
-## 3. O Driver JDBC
-Para a conexão funcionar, você precisa do driver do MySQL. Ele já está incluído no projeto dentro da pasta:
-`src/backend/lib/mysql-connector-j.jar`
+A conexão agora usa o driver do PostgreSQL. Você deve substituir o arquivo na pasta `lib`:
 
-Se o professor perguntar: este arquivo é o "tradutor" que o Java usa para enviar comandos SQL para o servidor MySQL.
+- Remova: `mysql-connector-j.jar`
+- Adicione: `postgresql-42.x.x.jar` (Baixe em [jdbc.postgresql.org](https://jdbc.postgresql.org/download/))
 
-## 4. Usando no Código
-Sempre que precisar buscar algo no banco dentro de um Service ou Repository, chame a nossa classe de conexão assim:
+## 4. Mudanças no Código
 
-```java
-import database.ConexaoBanco;
-import java.sql.Connection;
+A classe `ConexaoBanco.java` já foi atualizada para usar:
 
-Connection conexao = ConexaoBanco.getConexao();
-// Daqui pra frente é só usar o 'conexao'
-```
+- Driver: `org.postgresql.Driver`
+- Prefixo: `jdbc:postgresql://`
