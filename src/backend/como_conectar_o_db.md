@@ -1,9 +1,5 @@
 # Guia: Como conectar ao Supabase (PostgreSQL)
 
-Para migrar o backend do XAMPP para o Supabase, siga estes passos:
-
----
-
 ## 1. Configurar o Supabase
 
 1. Crie um projeto no [Supabase](https://supabase.com/).
