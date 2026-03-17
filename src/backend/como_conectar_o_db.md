@@ -11,10 +11,3 @@
 ## 3. O Driver JDBC (PostgreSQL)
 
 A conexão usa o driver do PostgreSQL na pasta `lib`:
-
-## 4. Mudanças no Código
-
-A classe `ConexaoBanco.java` já foi atualizada para usar:
-
-- Driver: `org.postgresql.Driver`
-- Prefixo: `jdbc:postgresql://`
