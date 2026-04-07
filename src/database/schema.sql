@@ -1,5 +1,4 @@
 -- Script para criação do banco de dados e tabelas do sistema AXIO
--- Ajustado para conformidade total com os requisitos do projeto da faculdade
 
 CREATE DATABASE IF NOT EXISTS axio_db;
 USE axio_db;
