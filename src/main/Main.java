@@ -7,20 +7,36 @@ import java.util.List;
 
 /**
  * Ponto de entrada do sistema AXIO via Terminal (CLI).
+ * Esta classe gerencia a interação direta com o usuário, permitindo realizar
+ * todas as operações de CRUD através de um menu interativo.
+ * 
+ * @author Victor Rego Muniz
+ * @author Gabriel Lourenço Datilo
  */
 public class Main {
+    // Scanner global para capturar entradas do teclado
     private static final Scanner scanner = new Scanner(System.in);
+    
+    // Instância do controller para gerenciar as regras de negócio de Equipe
     private static final EquipeController controller = new EquipeController();
 
+    /**
+     * Método principal que inicia o loop do menu do sistema.
+     */
     public static void main(String[] args) {
         int opcao = -1;
 
+        // Loop principal: continua rodando até o usuário escolher a opção 0 (Sair)
         while (opcao != 0) {
             exibirMenu();
             try {
+                // Captura a opção e trata erros de entrada não numérica
                 opcao = Integer.parseInt(scanner.nextLine());
                 processarOpcao(opcao);
+                
+                // Pausa após cada operação para que o usuário possa ler o feedback
                 if (opcao != 0) pausar();
+                
             } catch (NumberFormatException e) {
                 System.out.println("\nERRO: Por favor, digite um número válido.");
             }
@@ -29,6 +45,9 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Exibe as opções disponíveis no menu CLI.
+     */
     private static void exibirMenu() {
         System.out.println("\n" + "=".repeat(40));
         System.out.println("        AXIO - GESTÃO DE EQUIPES");
@@ -41,6 +60,9 @@ public class Main {
         System.out.print("\nEscolha uma opção: ");
     }
 
+    /**
+     * Direciona para a funcionalidade correspondente à opção escolhida.
+     */
     private static void processarOpcao(int opcao) {
         switch (opcao) {
             case 1 -> listarEquipes();
@@ -52,9 +74,13 @@ public class Main {
         }
     }
 
+    /**
+     * Busca e exibe todas as equipes cadastradas no MySQL.
+     */
     private static void listarEquipes() {
         System.out.println("\n--- LISTA DE EQUIPES ---");
         List<Equipe> equipes = controller.listar();
+        
         if (equipes.isEmpty()) {
             System.out.println("Nenhuma equipe cadastrada.");
         } else {
@@ -65,6 +91,9 @@ public class Main {
         }
     }
 
+    /**
+     * Coleta dados do terminal para criar uma nova equipe no banco.
+     */
     private static void criarEquipe() {
         System.out.println("\n--- NOVA EQUIPE ---");
         System.out.print("Nome da Equipe: ");
@@ -72,10 +101,12 @@ public class Main {
         System.out.print("Descrição: ");
         String desc = scanner.nextLine();
 
+        // Monta o objeto Model
         Equipe nova = new Equipe();
         nova.setNomeEquipe(nome);
         nova.setDescricao(desc);
 
+        // Envia para o Controller tratar o salvamento
         if (controller.criar(nova)) {
             System.out.println("Equipe criada com sucesso!");
         } else {
@@ -83,11 +114,15 @@ public class Main {
         }
     }
 
+    /**
+     * Localiza uma equipe pelo ID e atualiza suas informações.
+     */
     private static void editarEquipe() {
         System.out.println("\n--- EDITAR EQUIPE ---");
         System.out.print("Digite o ID da equipe que deseja editar: ");
         int id = Integer.parseInt(scanner.nextLine());
         
+        // Busca o estado atual do objeto antes de editar
         Equipe equipe = controller.buscar(id);
         if (equipe == null) {
             System.out.println("Equipe não encontrada!");
@@ -99,6 +134,7 @@ public class Main {
         System.out.print("Nova Descrição (atual: " + equipe.getDescricao() + "): ");
         String desc = scanner.nextLine();
 
+        // Atualiza apenas se o usuário digitar algo (mantém o antigo se deixar vazio)
         if (!nome.isEmpty()) equipe.setNomeEquipe(nome);
         if (!desc.isEmpty()) equipe.setDescricao(desc);
 
@@ -109,11 +145,15 @@ public class Main {
         }
     }
 
+    /**
+     * Remove permanentemente uma equipe do banco de dados MySQL.
+     */
     private static void deletarEquipe() {
         System.out.println("\n--- DELETAR EQUIPE ---");
         System.out.print("Digite o ID da equipe para REMOVER: ");
         int id = Integer.parseInt(scanner.nextLine());
 
+        // Medida de segurança: pede confirmação antes de apagar do banco
         System.out.print("TEM CERTEZA? (S/N): ");
         String confirma = scanner.nextLine();
 
@@ -127,6 +167,10 @@ public class Main {
             System.out.println("Operação cancelada.");
         }
     }
+
+    /**
+     * Helper para pausar o console e permitir a leitura dos dados.
+     */
     private static void pausar() {
         System.out.println("\n\nPressione ENTER para continuar...");
         scanner.nextLine();

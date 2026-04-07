@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.io.File;
 
 /**
- * Classe responsável pela conexão com o banco de dados Supabase (PostgreSQL).
- * Fornece novas conexões para serem usadas com try-with-resources.
+ * Classe responsável pela conexão com o banco de dados MySQL (XAMPP).
+ * Gerencia o carregamento das propriedades do arquivo .env e estabelece
+ * a conexão via JDBC.
  */
 public class ConexaoBanco {
     private static final String CAMINHO_ENV = ".env";
