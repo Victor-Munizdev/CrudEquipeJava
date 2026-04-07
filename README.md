@@ -32,6 +32,6 @@ Para facilitar o entendimento de cada parte do sistema, separamos os guias abaix
 
 ## Desenvolvedores
 
-- Victor Rego Muniz (GitHub: @Victor-Munizdev)
-- Gabriel Lourenço Datilo (GitHub: @JAPAxx)
-- O outro integrante do projeto teria sido a Talisia Vitória Santos Matos Maia mas a facs nivelou o curso dela e ela já tinha feito esta matéria, então ela não pode participar do projeto.
+- [Victor Rego Muniz](https://github.com/Victor-Munizdev)
+- [Gabriel Lourenço Datilo](https://github.com/JAPAxx)
+- O outro integrante do projeto teria sido a Talísia Vitória Santos Matos Maia, mas a faculdade nivelou o curso dela e ela já tinha feito esta matéria, então ela não pode participar do projeto.
