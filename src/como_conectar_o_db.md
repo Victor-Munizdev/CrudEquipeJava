@@ -25,11 +25,10 @@ DB_SENHA=
 
 A gente usa o driver `mysql-connector-j.jar` que já deixei na pasta `src/lib/`. Se precisar trocar, é só baixar o do MySQL Connector/J e jogar lá.
 
-## 4. Resolvendo erro de acesso no Mac
+## 4. Resolvendo Erros de Permissão (Necessário em alguns computadores)
 
-Se o terminal disser que não tem permissão para o `root`, roda esse comando na aba SQL do seu phpMyAdmin:
+Se o Java der um erro de `Access denied for user 'root'`, rode o conteúdo do arquivo abaixo na aba SQL do seu phpMyAdmin:
 
-```sql
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.65.1' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-```
+- Arquivo: `src/database/configura_permissao.sql`
+
+Isso vai garantir que o usuário `root` tenha permissão total para rodar os comandos a partir do seu Java independentemente do sistema operacional.
