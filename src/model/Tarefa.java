@@ -9,7 +9,8 @@ public class Tarefa {
     private int id;
     private String titulo;
     private String descricao;
-    private Date dataVencimento;
+    private Date dataInicio;
+    private Date dataTermino;
     private String status;
     private int idProjeto;
     private int idUsuarioResponsavel;
@@ -19,11 +20,12 @@ public class Tarefa {
     }
 
     // Construtor completo
-    public Tarefa(int id, String titulo, String descricao, Date dataVencimento, String status, int idProjeto, int idUsuarioResponsavel) {
+    public Tarefa(int id, String titulo, String descricao, Date dataInicio, Date dataTermino, String status, int idProjeto, int idUsuarioResponsavel) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
+        this.dataInicio = dataInicio;
+        this.dataTermino = dataTermino;
         this.status = status;
         this.idProjeto = idProjeto;
         this.idUsuarioResponsavel = idUsuarioResponsavel;
@@ -54,12 +56,20 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public Date getDataVencimento() {
-        return dataVencimento;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(Date dataTermino) {
+        this.dataTermino = dataTermino;
     }
 
     public String getStatus() {

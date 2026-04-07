@@ -86,7 +86,7 @@ public class UsuarioRepository {
             stmt.setString(1, usuario.getNomeCompleto());
             stmt.setString(2, usuario.getCpf());
             stmt.setString(3, usuario.getEmail());
-            stmt.setString(4, usuario.getCargo().name());
+            stmt.setString(4, usuario.getCargo().getDescricao());
             stmt.setString(5, usuario.getLogin());
             stmt.setString(6, usuario.getSenha());
             return stmt.executeUpdate() > 0;
@@ -106,7 +106,7 @@ public class UsuarioRepository {
             stmt.setString(1, usuario.getNomeCompleto());
             stmt.setString(2, usuario.getCpf());
             stmt.setString(3, usuario.getEmail());
-            stmt.setString(4, usuario.getCargo().name());
+            stmt.setString(4, usuario.getCargo().getDescricao());
             stmt.setString(5, usuario.getLogin());
             stmt.setString(6, usuario.getSenha());
             stmt.setInt(7, usuario.getId());

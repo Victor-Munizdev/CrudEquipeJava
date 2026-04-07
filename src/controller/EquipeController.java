@@ -66,4 +66,8 @@ public class EquipeController {
     public boolean deletar(int id) {
         return equipeService.remover(id);
     }
+
+    public boolean adicionarMembro(int idEquipe, int idUsuario) {
+        return equipeService.vincularMembro(idEquipe, idUsuario);
+    }
 }

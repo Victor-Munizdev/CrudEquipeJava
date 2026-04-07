@@ -168,4 +168,17 @@ public class EquipeRepository {
             return false;
         }
     }
+
+    public boolean vincularMembro(int idEquipe, int idUsuario) {
+        String sql = "INSERT INTO equipe_membros (id_equipe, id_usuario) VALUES (?, ?)";
+        try (Connection conn = ConexaoBanco.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEquipe);
+            stmt.setInt(2, idUsuario);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("ERRO ao vincular membro: " + e.getMessage());
+            return false;
+        }
+    }
 }

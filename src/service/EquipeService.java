@@ -82,4 +82,9 @@ public class EquipeService {
         }
         return equipeRepository.deletar(id);
     }
+
+    public boolean vincularMembro(int idEquipe, int idUsuario) {
+        if (idEquipe <= 0 || idUsuario <= 0) return false;
+        return equipeRepository.vincularMembro(idEquipe, idUsuario);
+    }
 }

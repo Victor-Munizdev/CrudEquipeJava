@@ -31,7 +31,8 @@ public class TarefaRepository {
                     rs.getInt("id"),
                     rs.getString("titulo"),
                     rs.getString("descricao"),
-                    rs.getDate("data_vencimento"),
+                    rs.getDate("data_inicio"),
+                    rs.getDate("data_termino"),
                     rs.getString("status"),
                     rs.getInt("id_projeto"),
                     rs.getInt("id_usuario_responsavel")
@@ -63,7 +64,8 @@ public class TarefaRepository {
                         rs.getInt("id"),
                         rs.getString("titulo"),
                         rs.getString("descricao"),
-                        rs.getDate("data_vencimento"),
+                        rs.getDate("data_inicio"),
+                        rs.getDate("data_termino"),
                         rs.getString("status"),
                         rs.getInt("id_projeto"),
                         rs.getInt("id_usuario_responsavel")
@@ -79,15 +81,16 @@ public class TarefaRepository {
      * Insere uma nova tarefa no banco de dados.
      */
     public boolean inserir(Tarefa tarefa) {
-        String sql = "INSERT INTO tarefas (titulo, descricao, data_vencimento, status, id_projeto, id_usuario_responsavel) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tarefas (titulo, descricao, data_inicio, data_termino, status, id_projeto, id_usuario_responsavel) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConexaoBanco.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, tarefa.getTitulo());
             stmt.setString(2, tarefa.getDescricao());
-            stmt.setDate(3, tarefa.getDataVencimento());
-            stmt.setString(4, tarefa.getStatus());
-            stmt.setInt(5, tarefa.getIdProjeto());
-            stmt.setInt(6, tarefa.getIdUsuarioResponsavel());
+            stmt.setDate(3, tarefa.getDataInicio());
+            stmt.setDate(4, tarefa.getDataTermino());
+            stmt.setString(5, tarefa.getStatus());
+            stmt.setInt(6, tarefa.getIdProjeto());
+            stmt.setInt(7, tarefa.getIdUsuarioResponsavel());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("ERRO ao inserir tarefa: " + e.getMessage());
@@ -99,16 +102,17 @@ public class TarefaRepository {
      * Atualiza os dados de uma tarefa existente.
      */
     public boolean editar(Tarefa tarefa) {
-        String sql = "UPDATE tarefas SET titulo = ?, descricao = ?, data_vencimento = ?, status = ?, id_projeto = ?, id_usuario_responsavel = ? WHERE id = ?";
+        String sql = "UPDATE tarefas SET titulo = ?, descricao = ?, data_inicio = ?, data_termino = ?, status = ?, id_projeto = ?, id_usuario_responsavel = ? WHERE id = ?";
         try (Connection conn = ConexaoBanco.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, tarefa.getTitulo());
             stmt.setString(2, tarefa.getDescricao());
-            stmt.setDate(3, tarefa.getDataVencimento());
-            stmt.setString(4, tarefa.getStatus());
-            stmt.setInt(5, tarefa.getIdProjeto());
-            stmt.setInt(6, tarefa.getIdUsuarioResponsavel());
-            stmt.setInt(7, tarefa.getId());
+            stmt.setDate(3, tarefa.getDataInicio());
+            stmt.setDate(4, tarefa.getDataTermino());
+            stmt.setString(5, tarefa.getStatus());
+            stmt.setInt(6, tarefa.getIdProjeto());
+            stmt.setInt(7, tarefa.getIdUsuarioResponsavel());
+            stmt.setInt(8, tarefa.getId());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("ERRO ao editar tarefa: " + e.getMessage());
